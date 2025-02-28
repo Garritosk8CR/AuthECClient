@@ -22,5 +22,7 @@ constructor(public formBuilder: FormBuilder) {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-
+  onSubmit() {
+    console.log(this.registrationForm.value);
+  }
 }
