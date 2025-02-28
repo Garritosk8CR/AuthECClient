@@ -11,7 +11,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validat
 
 export class RegistrationComponent implements OnInit {
 registrationForm: any;
-
+isSubmitted: boolean = false;
 constructor(public formBuilder: FormBuilder) {
   this.registrationForm = this.formBuilder.group({
     fullName: ['', Validators.required],
@@ -28,10 +28,15 @@ constructor(public formBuilder: FormBuilder) {
     confirmPassword?.setErrors({passwordMismatch: true}) : confirmPassword?.setErrors(null);
     return null;
   }
+  hasDisplayableError(controlName: string): boolean {
+    const control = this.registrationForm.get(controlName);
+    return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched));
+  }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
   onSubmit() {
+    this.isSubmitted = true;
     console.log(this.registrationForm.value);
   }
 }
