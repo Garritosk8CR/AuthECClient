@@ -4,7 +4,7 @@
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="full name" formControlName="fullName">
-        <div *ngIf="registrationForm.controls.fullName.hasError('required')" class="error-feedback">
+        <div *ngIf="hasDisplayableError('fullName') && registrationForm.controls.fullName.hasError('required')" class="error-feedback">
             Full name is required.
         </div>
     </div>
