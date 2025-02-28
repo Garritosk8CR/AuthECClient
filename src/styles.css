@@ -2,3 +2,19 @@
 body {
     font-family: 'Inter', sans-serif;
 }
+.error-feedback {
+    color: crimson;
+    font-size: 0.9rem;
+    margin: 0.3rem !important;
+    margin-top: 0.1rem !important;
+    /* Add animation for error feedback */
+    animation-name: error-feedback-animation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.5s;
+    /* Add animation for error feedback */
+    animation: error-feedback-animation 0.5s ease-in-out infinite;
+}
