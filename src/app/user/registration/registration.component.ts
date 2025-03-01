@@ -38,6 +38,8 @@ constructor(public formBuilder: FormBuilder) {
   }
   onSubmit() {
     this.isSubmitted = true;
-    console.log(this.registrationForm.value);
+    if (this.registrationForm.invalid) {
+      console.log(this.registrationForm.value);
+    }   
   }
 }
