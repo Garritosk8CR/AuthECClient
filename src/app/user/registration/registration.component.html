@@ -24,7 +24,7 @@
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="password" formControlName="password">
         <div *ngIf="hasDisplayableError('password')" class="error-feedback">
-            <ng-container [ngSwitch]="registrationForm.controls.password.errors">
+            <ng-container [ngSwitch]="registrationForm.controls.password.errors | firstKey">
                 <div *ngSwitchCase="registrationForm.controls.password.hasError('required')" class="error-feedback">
                     Password is required.
                 </div>
