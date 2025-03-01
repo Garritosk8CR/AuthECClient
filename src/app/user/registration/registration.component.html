@@ -4,30 +4,38 @@
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="full name" formControlName="fullName">
-        <div *ngIf="hasDisplayableError('fullName') && registrationForm.controls.fullName.hasError('required')" class="error-feedback">
-            Full name is required.
-        </div>
+        <div *ngIf="hasDisplayableError('fullName')" class="error-feedback">
+            <div *ngIf="registrationForm.controls.fullName.hasError('required')" class="error-feedback">
+                Full name is required.
+            </div>
+        </div>   
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="email" formControlName="email">
-        <div *ngIf="hasDisplayableError('email') && registrationForm.controls.email.hasError('required')" class="error-feedback">
-            Email is required.
-        </div>
-        <div *ngIf="hasDisplayableError('email') && registrationForm.controls.email.hasError('email')" class="error-feedback">
-            Invalid email format.
+        <div *ngIf="hasDisplayableError('email')">
+            <div *ngIf="registrationForm.controls.email.hasError('required')" class="error-feedback">
+                Email is required.
+            </div>
+            <div *ngIf="registrationForm.controls.email.hasError('email')" class="error-feedback">
+                Invalid email format.
+            </div>
         </div>
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="password" formControlName="password">
-        <div *ngIf="hasDisplayableError('password') && registrationForm.controls.password.hasError('required')" class="error-feedback">
-            Password is required.
-        </div>
-        <div *ngIf="hasDisplayableError('password') && registrationForm.controls.password.hasError('minlength')" class="error-feedback">
-            Password must be at least 6 characters long.
-        </div>
-        <div *ngIf="hasDisplayableError('password') && registrationForm.controls.password.hasError('pattern')" class="error-feedback">
-            Password must contain at least one special character.
-        </div>
+        <div *ngIf="hasDisplayableError('password')" class="error-feedback">
+            <ng-container [ngSwitch]="registrationForm.controls.password.errors">
+                <div *ngSwitchCase="registrationForm.controls.password.hasError('required')" class="error-feedback">
+                    Password is required.
+                </div>
+                <div *ngSwitchCase=" registrationForm.controls.password.hasError('minlength')" class="error-feedback">
+                    Password must be at least 6 characters long.
+                </div>
+                <div *ngSwitchCase="registrationForm.controls.password.hasError('pattern')" class="error-feedback">
+                    Password must contain at least one special character.
+                </div>
+            </ng-container>   
+        </div>  
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="confirm password" formControlName="confirmPassword">
