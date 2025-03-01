@@ -40,7 +40,19 @@ constructor(public formBuilder: FormBuilder, private service: AuthService) {
   onSubmit() {
     this.isSubmitted = true;
     if (this.registrationForm.invalid) {
-      this.service.createUser(this.registrationForm.value);
+      this.service.createUser(this.registrationForm.value)
+      .subscribe({
+        next: (res: any) => {
+          if (res.succeeded) {
+            this.registrationForm.reset();
+            this.isSubmitted = false;
+          }
+          console.log(res, 'User created successfully')
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      })
     }   
   }
 }
