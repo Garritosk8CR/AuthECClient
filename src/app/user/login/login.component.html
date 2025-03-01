@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="mb-04">
+    <h2 class="text-success">Sign in</h2>
+</div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="email" formControlName="email">
+        <!-- <div *ngIf="loginForm.controls.email.hasError('required')" class="error-feedback">
+            Email is required.
+        </div> -->
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="password" formControlName="password">
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100 rounded-3" [disabled]="loginForm.invalid">Sign in</button>
+    </div>
+</form>

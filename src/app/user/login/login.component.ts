@@ -16,5 +16,12 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
   }
+
+  onSubmit() {
+    // TODO: Implement login logic here
+    console.log(this.loginForm.value);
+    // Reset form for next attempt
+    this.loginForm.reset();
+  }
   
 }

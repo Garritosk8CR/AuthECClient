@@ -1,5 +1,8 @@
-<div class="mb-04 h2 text-success">
-    Sign Up
+<div class="mb-04">
+    <h2 class="text-success">Sign Up</h2>
+</div>
+<div>
+    if you have an account, <a routerLink="/login" class="text-decoration-none fw-medium text-success d-inlin-block">sign in</a>
 </div>
 <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <div class="mb-3">
