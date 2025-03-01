@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: any;
+  isSubmitted: boolean = false;
   constructor(public formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -19,10 +20,16 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.isSubmitted = true;
     // TODO: Implement login logic here
     console.log(this.loginForm.value);
     // Reset form for next attempt
     this.loginForm.reset();
+  }
+
+  hasDisplayableError(controlName: string): boolean {
+    const control = this.loginForm.get(controlName);
+    return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched));
   }
   
 }
