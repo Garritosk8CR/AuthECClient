@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
 import { AuthService } from '../../shared/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +15,7 @@ import { AuthService } from '../../shared/services/auth.service';
 export class RegistrationComponent implements OnInit {
 registrationForm: any;
 isSubmitted: boolean = false;
-constructor(public formBuilder: FormBuilder, private service: AuthService) {
+constructor(public formBuilder: FormBuilder, private service: AuthService, private toastr: ToastrService) {
   this.registrationForm = this.formBuilder.group({
     fullName: ['', Validators.required],
     email: ['',[Validators.required,Validators.email]],
@@ -46,11 +47,27 @@ constructor(public formBuilder: FormBuilder, private service: AuthService) {
           if (res.succeeded) {
             this.registrationForm.reset();
             this.isSubmitted = false;
+            this.toastr.success('User created successfully');
+            console.log(res, 'User created successfully');
+          } else {
+            
           }
-          console.log(res, 'User created successfully')
+          
         },
-        error: (error) => {
-          console.log(error);
+        error: (err) => {
+          err.error.errors.forEach((element: any) => {
+            switch (element.code) {
+              case 'DuplicateUserName':
+                this.toastr.error('Username is already taken');
+                break;
+              case 'DuplicateEmail':
+                this.toastr.error('Email is already taken');
+                break;
+              default:
+                this.toastr.error(element.description);
+                break;
+            }
+          });
         },
       })
     }   

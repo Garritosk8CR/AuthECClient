@@ -54,7 +54,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "npm_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -113,7 +113,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "npm_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
