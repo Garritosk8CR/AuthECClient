@@ -25,13 +25,13 @@
         <input class="form-control bg-body-secondary" placeholder="password" formControlName="password">
         <div *ngIf="hasDisplayableError('password')" class="error-feedback">
             <ng-container [ngSwitch]="registrationForm.controls.password.errors | firstKey">
-                <div *ngSwitchCase="registrationForm.controls.password.hasError('required')" class="error-feedback">
+                <div *ngSwitchCase="'required'" class="error-feedback">
                     Password is required.
                 </div>
-                <div *ngSwitchCase=" registrationForm.controls.password.hasError('minlength')" class="error-feedback">
+                <div *ngSwitchCase="'minlength'" class="error-feedback">
                     Password must be at least 6 characters long.
                 </div>
-                <div *ngSwitchCase="registrationForm.controls.password.hasError('pattern')" class="error-feedback">
+                <div *ngSwitchCase="'pattern'" class="error-feedback">
                     Password must contain at least one special character.
                 </div>
             </ng-container>   
@@ -39,6 +39,11 @@
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" placeholder="confirm password" formControlName="confirmPassword">
+        <div *ngIf="hasDisplayableError('confirmPassword')">
+            <div *ngIf="registrationForm.controls.confirmPassword.hasError('passwordMismatch')" class="error-feedback">
+                Passwords do not match.
+            </div>
+        </div>
     </div>
     <div class="mt-4">
         <button type="submit" class="btn btn-success w-100 rounded-3" [disabled]="registrationForm.invalid">Register</button>

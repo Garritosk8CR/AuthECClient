@@ -12,5 +12,4 @@ export class FirstKeyPipe implements PipeTransform {
     }
     return null;
   }
-
 }
