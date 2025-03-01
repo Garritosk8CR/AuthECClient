@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RegistrationComponent implements OnInit {
 registrationForm: any;
 isSubmitted: boolean = false;
+
 constructor(public formBuilder: FormBuilder, private service: AuthService, private toastr: ToastrService) {
   this.registrationForm = this.formBuilder.group({
     fullName: ['', Validators.required],
@@ -31,13 +32,16 @@ constructor(public formBuilder: FormBuilder, private service: AuthService, priva
     confirmPassword?.setErrors({passwordMismatch: true}) : confirmPassword?.setErrors(null);
     return null;
   }
+
   hasDisplayableError(controlName: string): boolean {
     const control = this.registrationForm.get(controlName);
     return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched));
   }
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
+
   onSubmit() {
     this.isSubmitted = true;
     if (this.registrationForm.invalid) {
@@ -51,8 +55,7 @@ constructor(public formBuilder: FormBuilder, private service: AuthService, priva
             console.log(res, 'User created successfully');
           } else {
             
-          }
-          
+          }      
         },
         error: (err) => {
           err.error.errors.forEach((element: any) => {
