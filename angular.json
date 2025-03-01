@@ -112,7 +112,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "npm_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }
