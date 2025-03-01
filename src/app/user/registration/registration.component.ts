@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +14,7 @@ import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
 export class RegistrationComponent implements OnInit {
 registrationForm: any;
 isSubmitted: boolean = false;
-constructor(public formBuilder: FormBuilder) {
+constructor(public formBuilder: FormBuilder, private service: AuthService) {
   this.registrationForm = this.formBuilder.group({
     fullName: ['', Validators.required],
     email: ['',[Validators.required,Validators.email]],
@@ -39,7 +40,7 @@ constructor(public formBuilder: FormBuilder) {
   onSubmit() {
     this.isSubmitted = true;
     if (this.registrationForm.invalid) {
-      console.log(this.registrationForm.value);
+      this.service.createUser(this.registrationForm.value);
     }   
   }
 }
