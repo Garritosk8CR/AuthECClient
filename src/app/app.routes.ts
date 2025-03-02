@@ -5,6 +5,11 @@ import { LoginComponent } from './user/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
+    {
+        path: 'dashboard', 
+        redirectTo: '/signin',
+        pathMatch: 'full'  // redirect to /signin if no other path matches
+    },
     { 
         path: '', 
         component: UserComponent,
