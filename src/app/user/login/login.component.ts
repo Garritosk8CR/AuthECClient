@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,11 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   loginForm: any;
   isSubmitted: boolean = false;
-  constructor(public formBuilder: FormBuilder, private service: AuthService, private toastr: ToastrService) {
+  constructor(
+    public formBuilder: FormBuilder, 
+    private service: AuthService, 
+    private toastr: ToastrService, 
+    private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
@@ -27,6 +31,8 @@ export class LoginComponent {
       this.service.signin(this.loginForm.value).subscribe({
         next: (res : any) => {
           localStorage.setItem('token', res.token);
+          this.toastr.success('Logged in successfully');
+          this.router.navigateByUrl('/dashboard');
         },
         error: (err : any) => {
           this.toastr.error(err.error.message);
