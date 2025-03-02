@@ -11,4 +11,7 @@ export class AuthService {
   createUser(model: any) {
     return this.http.post(`${this.baseUrl}/signup`, model);
   }
+  signin(model: any) {
+    return this.http.post(`${this.baseUrl}/signin`, model);
+  }
 }
