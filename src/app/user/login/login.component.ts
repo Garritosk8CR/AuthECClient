@@ -24,7 +24,7 @@ export class LoginComponent {
   onSubmit() {
     this.isSubmitted = true;
     if(this.loginForm.valid) {
-      this.service.login(this.loginForm.value).subscribe({
+      this.service.signin(this.loginForm.value).subscribe({
         next: (res : any) => {
           localStorage.setItem('token', res.token);
         },
