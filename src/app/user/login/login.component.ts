@@ -35,7 +35,14 @@ export class LoginComponent {
           this.router.navigateByUrl('/dashboard');
         },
         error: (err : any) => {
-          this.toastr.error(err.error.message);
+          
+          if(err.status === 400) {
+            this.toastr.error('Incorrect email or password', 'Login failed');
+          } else {
+            this.toastr.error('Something went wrong', 'Login failed');
+            console.log('error occured during login:\n', err);
+          }
+          
         }
       })
     }
