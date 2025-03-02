@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent {
 
   constructor(private router: Router) { }
-  onlogout() {
+  onLogout() {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/signin');
   }
