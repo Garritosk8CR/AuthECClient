@@ -18,7 +18,9 @@ export class LoginComponent {
     public formBuilder: FormBuilder, 
     private service: AuthService, 
     private toastr: ToastrService, 
-    private router: Router) {
+    private router: Router,
+    private authService: AuthService
+    ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
