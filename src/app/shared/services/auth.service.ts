@@ -14,4 +14,7 @@ export class AuthService {
   signin(model: any) {
     return this.http.post(`${this.baseUrl}/signin`, model);
   }
+  isLoggedIn() {
+    return !!localStorage.getItem('token');
+  }
 }
