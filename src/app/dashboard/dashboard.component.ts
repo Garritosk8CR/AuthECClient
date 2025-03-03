@@ -12,7 +12,7 @@ export class DashboardComponent {
 
   constructor(private router: Router, private authService: AuthService) { }
   onLogout() {
-    localStorage.removeItem('token');
+    this.authService.deleteToken();
     this.router.navigateByUrl('/signin');
   }
 }
