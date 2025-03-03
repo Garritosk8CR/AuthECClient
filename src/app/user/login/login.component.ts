@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './login.component.html',
   styles: ``
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: any;
   isSubmitted: boolean = false;
   constructor(
@@ -32,7 +32,7 @@ export class LoginComponent {
     if(this.loginForm.valid) {
       this.service.signin(this.loginForm.value).subscribe({
         next: (res : any) => {
-          localStorage.setItem('token', res.token);
+          this.authService.saveToken(res.token);
           this.toastr.success('Logged in successfully');
           this.router.navigateByUrl('/dashboard');
         },
@@ -59,4 +59,9 @@ export class LoginComponent {
     return Boolean(control?.invalid) && (this.isSubmitted || Boolean(control?.touched));
   }
   
+  ngOnInit(): void {
+    if(this.authService.isLoggedIn()) {
+     this.router.navigateByUrl('/dashboard');  // Redirect to dashboard if already logged in
+    }
+  }
 }
