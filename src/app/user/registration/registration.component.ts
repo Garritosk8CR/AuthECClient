@@ -4,7 +4,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidatorFn, Validat
 import { FirstKeyPipe } from '../../shared/pipes/first-key.pipe';
 import { AuthService } from '../../shared/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,12 @@ export class RegistrationComponent implements OnInit {
 registrationForm: any;
 isSubmitted: boolean = false;
 
-constructor(public formBuilder: FormBuilder, private service: AuthService, private toastr: ToastrService) {
+constructor(
+  public formBuilder: FormBuilder, 
+  private service: AuthService, 
+  private toastr: ToastrService,
+  private router: Router
+) {
   this.registrationForm = this.formBuilder.group({
     fullName: ['', Validators.required],
     email: ['',[Validators.required,Validators.email]],
@@ -40,7 +45,9 @@ constructor(public formBuilder: FormBuilder, private service: AuthService, priva
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    if(this.service.isLoggedIn()) {
+     this.router.navigateByUrl('/dashboard');  // Redirect to dashboard if already logged in
+    }
   }
 
   onSubmit() {
