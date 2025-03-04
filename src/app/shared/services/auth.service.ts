@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TOKEN_KEY } from '../Constants';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,12 @@ import { TOKEN_KEY } from '../Constants';
 export class AuthService {
 
   constructor(private http:HttpClient) { }
-  baseUrl = 'http://localhost:5023/api';
+  
   createUser(model: any) {
-    return this.http.post(`${this.baseUrl}/signup`, model);
+    return this.http.post(`${environment.apiBaseUrl}/signup`, model);
   }
   signin(model: any) {
-    return this.http.post(`${this.baseUrl}/signin`, model);
+    return this.http.post(`${environment.apiBaseUrl}/signin`, model);
   }
   isLoggedIn() {
     return !!localStorage.getItem(TOKEN_KEY);
