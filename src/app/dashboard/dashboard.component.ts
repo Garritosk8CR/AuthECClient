@@ -11,6 +11,7 @@ import { UserService } from '../shared/services/user.service';
 })
 export class DashboardComponent implements OnInit {
 
+  fullName: string = '';
   constructor(
     private router: Router, 
     private authService: AuthService,
@@ -21,5 +22,11 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/signin');
   }
   ngOnInit(): void {
+    this.userService.getUserProfile().subscribe({
+      next: (res: any) => 
+        this.fullName = res.fullName,
+      error: (err: any) => 
+        console.error(err)     
+    });
   }
 }

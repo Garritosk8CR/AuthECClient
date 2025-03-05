@@ -10,8 +10,6 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   getUserProfile() {
-    this.http.get(environment.apiBaseUrl + '/userprofile').subscribe(response => {
-      console.log(response);
-    });
+    return this.http.get(environment.apiBaseUrl + '/userprofile');
   }
 }
